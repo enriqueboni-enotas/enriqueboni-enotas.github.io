@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OKRs 2026 — Foundation (eNotas) & Regulatory (Fiscal Journey)</title>
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --primary-light: #e8f0fe;
+      --success: #1e8e3e;
+      --success-light: #e6f4ea;
+      --warning: #f9ab00;
+      --warning-light: #fef7e0;
+      --danger: #d93025;
+      --gray-50: #f8f9fa;
+      --gray-100: #f1f3f4;
+      --gray-200: #e8eaed;
+      --gray-600: #5f6368;
+      --gray-800: #3c4043;
+      --gray-900: #202124;
+      --radius: 12px;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-900);
+      line-height: 1.6;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding: 2rem;
+      background: linear-gradient(135deg, #1a73e8, #6c3ceb);
+      border-radius: var(--radius);
+      color: white;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      opacity: 0.9;
+      font-size: 0.95rem;
+    }
+
+    .team-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid var(--gray-200);
+    }
+
+    .team-tab {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      background: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--gray-600);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.2s;
+    }
+
+    .team-tab:hover {
+      color: var(--primary);
+    }
+
+    .team-tab.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    .team-section {
+      display: none;
+    }
+
+    .team-section.active {
+      display: block;
+    }
+
+    .team-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding: 1.25rem;
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .team-info-item {
+      font-size: 0.9rem;
+    }
+
+    .team-info-item strong {
+      color: var(--gray-600);
+      font-weight: 500;
+      display: block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+    }
+
+    .team-info-item span {
+      color: var(--gray-900);
+      font-weight: 600;
+    }
+
+    .objective {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+
+    .objective-header {
+      padding: 1.25rem 1.5rem;
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .objective-header h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--gray-900);
+    }
+
+    .objective-header .toggle {
+      font-size: 1.2rem;
+      color: var(--gray-600);
+      transition: transform 0.2s;
+    }
+
+    .objective.collapsed .objective-header .toggle {
+      transform: rotate(-90deg);
+    }
+
+    .objective.collapsed .objective-body {
+      display: none;
+    }
+
+    .objective-desc {
+      padding: 1rem 1.5rem;
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .kr-card {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .kr-card:last-child {
+      border-bottom: none;
+    }
+
+    .kr-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .kr-badge {
+      flex-shrink: 0;
+      background: var(--primary);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      margin-top: 2px;
+    }
+
+    .kr-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--gray-900);
+    }
+
+    .kr-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+      padding: 0.75rem;
+      background: var(--gray-50);
+      border-radius: 8px;
+      font-size: 0.85rem;
+    }
+
+    .kr-detail-item strong {
+      color: var(--gray-600);
+      font-weight: 500;
+    }
+
+    .kr-scale {
+      margin-top: 0.75rem;
+      padding: 0.75rem;
+      background: var(--gray-50);
+      border-radius: 8px;
+      font-size: 0.82rem;
+    }
+
+    .kr-scale summary {
+      cursor: pointer;
+      color: var(--gray-600);
+      font-weight: 500;
+    }
+
+    .kr-scale ul {
+      margin-top: 0.5rem;
+      padding-left: 1.25rem;
+    }
+
+    .kr-scale li {
+      margin-bottom: 0.25rem;
+      color: var(--gray-800);
+    }
+
+    .milestones {
+      margin-top: 0.5rem;
+      padding-left: 1.25rem;
+    }
+
+    .milestones li {
+      margin-bottom: 0.25rem;
+      font-size: 0.85rem;
+      color: var(--gray-800);
+    }
+
+    .repos-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+    }
+
+    .repos-table th,
+    .repos-table td {
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .repos-table th {
+      background: var(--gray-100);
+      font-weight: 600;
+      color: var(--gray-600);
+    }
+
+    .members-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .member-chip {
+      background: var(--gray-100);
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      color: var(--gray-800);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      padding: 1rem;
+      font-size: 0.8rem;
+      color: var(--gray-600);
+    }
+
+    /* Checkbox styles */
+    .kr-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+      padding: 0.6rem 0.75rem;
+      background: var(--success-light);
+      border-radius: 8px;
+      border: 1px solid #c8e6c9;
+    }
+
+    .kr-checkbox input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--success);
+      cursor: pointer;
+    }
+
+    .kr-checkbox label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--success);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .kr-checkbox.checked {
+      background: var(--success);
+      border-color: var(--success);
+    }
+
+    .kr-checkbox.checked label {
+      color: white;
+    }
+
+    .progress-bar {
+      margin: 1.5rem 0;
+      padding: 1rem 1.5rem;
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .progress-bar-label {
+      font-size: 0.85rem;
+      color: var(--gray-600);
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .progress-bar-track {
+      height: 8px;
+      background: var(--gray-200);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--success), #34a853);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>OKRs 2026</h1>
+      <p>Foundation (eNotas) & Regulatory (Fiscal Journey) — Coordenação: Enrique Bonifacio</p>
+    </header>
+
+    <div class="team-tabs">
+      <button class="team-tab active" onclick="switchTab('enotas')">Foundation (eNotas)</button>
+      <button class="team-tab" onclick="switchTab('regulatory')">Regulatory (Fiscal Journey)</button>
+    </div>
+
+    <!-- FOUNDATION (ENOTAS) -->
+    <div id="enotas" class="team-section active">
+      <div class="team-info">
+        <div class="team-info-item"><strong>Projeto Jira</strong><span>FRCAP</span></div>
+        <div class="team-info-item"><strong>Tech Lead</strong><span>Acaz Souza</span></div>
+        <div class="team-info-item"><strong>PM</strong><span>Natacha Leite</span></div>
+        <div class="team-info-item"><strong>Coordenador</strong><span>Enrique Bonifacio</span></div>
+      </div>
+      <div style="margin-bottom:1.5rem">
+        <strong style="font-size:0.85rem;color:var(--gray-600)">MEMBROS DO TIME</strong>
+        <div class="members-grid">
+          <span class="member-chip">Emanuel Martins (SE III)</span>
+          <span class="member-chip">Luciana Brasil (SE I)</span>
+          <span class="member-chip">Cleber Carmo (SE III)</span>
+          <span class="member-chip">Felipe Souza (SE III)</span>
+          <span class="member-chip">José Eduardo (SE III)</span>
+          <span class="member-chip">Felipe Casseb (SE III)</span>
+        </div>
+      </div>
+
+      <div class="progress-bar" id="enotas-progress">
+        <div class="progress-bar-label"><span>Progresso Geral</span><span id="enotas-progress-text">0/6 KRs
+            concluídos</span></div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="enotas-progress-fill" style="width:0%"></div>
+        </div>
+      </div>
+
+      <!-- Objetivo 1 eNotas -->
+      <div class="objective">
+        <div class="objective-header" onclick="toggleObjective(this)">
+          <h2>Objetivo 1: Tornar o eNotas menos high touch, permitindo escalabilidade</h2>
+          <span class="toggle">▼</span>
+        </div>
+        <div class="objective-desc">Reduzir a dependência de suporte humano, empoderando o usuário com fluxos
+          self-service, automatizando cobranças e melhorando a cadeia operacional entre Sustain, Produto e CX.</div>
+        <div class="objective-body">
+          <div class="kr-card">
+            <div class="kr-header">
+              <span class="kr-badge">KR1</span>
+              <span class="kr-title">Taxa de sucesso do novo fluxo de onboarding self-service: 60%</span>
+            </div>
+            <div class="kr-details">
+              <div class="kr-detail-item"><strong>Métrica:</strong> % novos usuários que configuraram conta, ativaram
+                app e emitiram nota teste</div>
+              <div class="kr-detail-item"><strong>Baseline:</strong> A definir (Q1/2026)</div>
+              <div class="kr-detail-item"><strong>Meta:</strong> 60%</div>
+              <div class="kr-detail-item"><strong>Prazo:</strong> Q4 2026</div>
+            </div>
+            <div class="kr-scale">
+              <details>
+                <summary>Escala de medição</summary>
+                <ul>
+                  <li><strong>0%:</strong> Fluxo não implementado ou taxa = 0%</li>
+                  <li><strong>25%:</strong> ~15% configuraram sozinhos</li>
+                  <li><strong>50%:</strong> ~30% configuraram sozinhos</li>
+                  <li><strong>75%:</strong> ~45% configuraram sozinhos</li>
+                  <li><strong>100%:</strong> 60% configuraram sozinhos</li>
+                  <li><strong>120%:</strong> Acima de 60%</li>
+                </ul>
+              </details>
+            </div>
+            <div class="kr-checkbox" data-kr="enotas-kr1">
+              <input type="checkbox" id="enotas-kr1" onchange="toggleKR(this)">
+              <label for="enotas-kr1">Meta atingida</label>
+            </div>
+          </div>
+
+          <div class="kr-card">
+            <div class="kr-header">
+              <span class="kr-badge">KR2</span>
+              <span class="kr-title">Reduzir de 10% para 0,5% a base eNotas passando pelo faturamento Iugu</span>
+            </div>
+            <div class="kr-details">
+              <div class="kr-detail-item"><strong>Métrica:</strong> % da base cobrada via Iugu</div>
+              <div class="kr-detail-item"><strong>Baseline:</strong> 10% (jan/2026)</div>
+              <div class="kr-detail-item"><strong>Meta:</strong> 0,5%</div>
+              <div class="kr-detail-item"><strong>Prazo:</strong> Q4 2026</div>
+            </div>
+            <div class="kr-scale">
+              <details>
+                <summary>Escala de medição</summary>
+                <ul>
+                  <li><strong>0%:</strong> 10% da base via Iugu (as is)</li>
+                  <li><strong>25%:</strong> ~7,5% via Iugu</li>
+                  <li><strong>50%:</strong> ~5% via Iugu</li>
+                  <li><strong>75%:</strong> ~2,5% via Iugu</li>
+                  <li><strong>100%:</strong> 0,5% via Iugu</li>
+                  <li><strong>120%:</strong> 0% via Iugu</li>
+                </ul>
+              </details>
+            </div>
+            <div class="kr-checkbox" data-kr="enotas-kr2">
+              <input type="checkbox" id="enotas-kr2" onchange="toggleKR(this)">
+              <label for="enotas-kr2">Meta atingida</label>
+            </div>
+          </div>
+
+          <div class="kr-card">
+            <div class="kr-header">
+              <span class="kr-badge">KR3</span>
+              <span class="kr-title">Atingir 3 milestones de operação mais saudável no eNotas</span>
+            </div>
+            <div class="kr-details">
+              <div class="kr-detail-item"><strong>Métrica:</strong> Milestones operacionais concluídos (de 3)</div>
+              <div class="kr-detail-item"><strong>Baseline:</strong> 0</div>
+              <div class="kr-detail-item"><strong>Meta:</strong> 3/3</div>
+              <div class="kr-detail-item"><strong>Prazo:</strong> Q4 2026</div>
+            </div>
+            <p style="font-size:0.85rem;margin-top:0.75rem;padding:0 0.75rem;color:var(--gray-600);font-weight:500">
+              Milestones:</p>
+            <ol class="milestones">
+              <li>Reduzir em 20% o volume do escalonamento de N2 para N3</li>
+              <li>Reduzir em 20% o transbordo do N3 para a Squad eNotas</li>
+              <li>Reduzir em 20% o tempo de resolução do transbordo</li>
+            </ol>
+            <div class="kr-checkbox" data-kr="enotas-kr3">
+              <input type="checkbox" id="enotas-kr3" onchange="toggleKR(this)">
+              <label for="enotas-kr3">Meta atingida</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Objetivo 2 eNotas -->
+      <div class="objective">
+        <div class="objective-header" onclick="toggleObjective(this)">
+          <h2>Objetivo 2: Programas Tech</h2>
+          <span class="toggle">▼</span>
+        </div>
+        <div class="objective-desc">Atender aos programas técnicos corporativos, garantindo conformidade com os padrões
+          de qualidade, acoplamento e adoção de design system.</div>
+        <div class="objective-body">
+          <div class="kr-card">
+            <div class="kr-header">
+              <span class="kr-badge">KR4</span>
+              <span class="kr-title">Resolver 100% dos apps (front) — Cosmos Adoption e Tech Reliability</span>
+            </div>
+            <div class="kr-details">
+              <div class="kr-detail-item"><strong>Repositório:</strong> app-enotas</div>
+              <div class="kr-detail-item"><strong>Meta:</strong> 100% dos apps resolvidos</div>
+              <div class="kr-detail-item"><strong>Prazo:</strong> Q4 2026</div>
+            </div>
+            <div class="kr-checkbox" data-kr="enotas-kr4">
+              <input type="checkbox" id="enotas-kr4" onchange="toggleKR(this)">
+              <label for="enotas-kr4">Meta atingida</label>
+            </div>
+          </div>
+
+          <div class="kr-card">
+            <div class="kr-header">
+              <span class="kr-badge">KR5</span>
+              <span class="kr-title">Resolver 100% dos serviços (back) — Marketplace Low Coupling e Tech
+                Reliability</span>
+            </div>
+            <div class="kr-details">
+              <div class="kr-detail-item"><strong>Repositório:</strong> invoice-nf</div>
+              <div class="kr-detail-item"><strong>Meta:</strong> 100% dos serviços resolvidos</div>
+              <div class="kr-detail-item"><strong>Prazo:</strong> Q4 2026</div>
+            </div>
+            <div class="kr-checkbox" data-kr="enotas-kr5">
+              <input type="checkbox" id="enotas-kr5" onchange="toggleKR(this)">
+              <label for="enotas-kr5">Meta atingida</label>
+            </div>
+          </div>
+
+          <div class="kr-card">
+            <div class="kr-header">
+              <span class="kr-badge">KR6</span>
+              <span class="kr-title">Atingir score GAS e PAS ≥ 92%</span>
+            </div>
+            <div class="kr-details">
+              <div class="kr-detail-item"><strong>Meta:</strong> Todos os repos com GAS e PAS ≥ 92%</div>
+              <div class="kr-detail-item"><strong>Prazo:</strong> Q4 2026</div>
+            </div>
+            <table class="repos-table">
+              <thead>
+                <tr>
+                  <th>Repositório</th>
+                  <th>Heimdall</th>
+                  <th>GAS</th>
+                  <th>PAS</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>invoice-nf</td>
+                  <td>92%</td>
+                  <td>79%</td>
+                  <td>96%</td>
+                </tr>
+                <tr>
+                  <td>app-enotas</td>
+                  <td>97%</td>
+                  <td>96%</td>
+                  <td>96%</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="kr-checkbox" data-kr="enotas-kr6">
+              <input type="checkbox" id="enotas-kr6" onchange="toggleKR(this)">
+              <label for="enotas-kr6">Meta atingida</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REGULATORY (FISCAL JOURNEY) -->
+    <div id="regulatory" class="team-section">
+      <div class="team-info">
+        <div class="team-info-item"><strong>Projeto Jira</strong><span>GRWT</span></div>
+        <div class="team-info-item"><strong>Tech Lead</strong><span>Gilmar Alcantara</span></div>
+        <div class="team-info-item"><strong>PM</strong><span>Julia Barros</span></div>
+        <div class="team-info-item"><strong>Coordenador</strong><span>Enrique Bonifacio</span></div>
+      </div>
+      <div style="margin-bottom:1.5rem">
+        <strong style="font-size:0.85rem;color:var(--gray-600)">MEMBROS DO TIME</strong>
+        <div class="members-grid">
+          <span class="member-chip">Bruno Souza (SE III)</span>
+          <span class="member-chip">Mateus Carvalho (SE III)</span>
+          <span class="member-chip">Gilmar Alcantara (Staff Engineer I)</span>
+        </div>
+      </div>
+
+      <div class="progress-bar" id="regulatory-progress">
+        <div class="progress-bar-label"><span>Progresso Geral</span><span id="regulatory-progress-text">0/5 KRs
+            concluídos</span></div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="regulatory-progress-fill" style="width:0%"></div>
+        </div>
+      </div>
+
+      <!-- Objetivo 1 Regulatory -->
+      <div class="objective">
+        <div class="objective-header" onclick="toggleObjective(this)">
+          <h2>Objetivo 1: Compliance fiscal no ecossistema Hotmart (BR e Global)</h2>
+          <span class="toggle">▼</span>
+        </div>
+        <div class="objective-desc">Garantir conformidade fiscal completa para suportar a operação nos principais
+          mercados, implementando regras tributárias, expandindo cobertura de países e assegurando compliance com
+          regulamentações locais.</div>
+        <div class="objective-body">
+          <div class="kr-card">
+            <div class="kr-header">
+              <span class="kr-badge">KR1</span>
+              <span class="kr-title">Estar em compliance fiscal nos 14 países com mais creators ativos</span>
+            </div>
+            <div class="kr-details">
+              <div class="kr-detail-item"><strong>Métrica:</strong> Nº de países (do top 14) em compliance</div>
+              <div class="kr-detail-item"><strong>Baseline:</strong> A definir (Q1/2026)</div>
+              <div class="kr-detail-item"><strong>Meta:</strong> 14 países</div>
+              <div class="kr-detail-item"><strong>Prazo:</strong> Q4 2026</div>
+            </div>
+            <p style="font-size:0.85rem;margin-top:0.75rem;padding:0 0.75rem;color:var(--gray-600);font-weight:500">Top
+              14 países:</p>
+            <ol class="milestones">
+              <li>Brasil</li>
+              <li>United States</li>
+              <li>Mexico</li>
+              <li>Spain</li>
+              <li>Colombia</li>
+              <li>United Arab Emirates</li>
+              <li>Andorra</li>
+              <li>Peru</li>
+              <li>Argentina</li>
+              <li>Panama</li>
+              <li>Chile</li>
+              <li>Portugal</li>
+              <li>Ecuador</li>
+              <li>France</li>
+            </ol>
+            <div class="kr-scale">
+              <details>
+                <summary>Escala de medição</summary>
+                <ul>
+                  <li><strong>0%:</strong> Nenhum país em compliance</li>
+                  <li><strong>25%:</strong> ~4 países</li>
+                  <li><strong>50%:</strong> ~7 países</li>
+                  <li><strong>75%:</strong> ~10 países</li>
+                  <li><strong>100%:</strong> 14 países</li>
+                  <li><strong>120%:</strong> Top 14 + mais 3 do top 20</li>
+                </ul>
+              </details>
+            </div>
+            <div class="kr-checkbox" data-kr="reg-kr1">
+              <input type="checkbox" id="reg-kr1" onchange="toggleKR(this)">
+              <label for="reg-kr1">Meta atingida</label>
+            </div>
+          </div>
+
+          <div class="kr-card">
+            <div class="kr-header">
+              <span class="kr-badge">KR2</span>
+              <span class="kr-title">Concluir 5 marcos de adequação ao modelo EMI até Q3</span>
+            </div>
+            <div class="kr-details">
+              <div class="kr-detail-item"><strong>Métrica:</strong> Milestones EMI concluídos (de 5)</div>
+              <div class="kr-detail-item"><strong>Baseline:</strong> 0</div>
+              <div class="kr-detail-item"><strong>Meta:</strong> 5/5</div>
+              <div class="kr-detail-item"><strong>Prazo:</strong> Q3 2026</div>
+            </div>
+            <p style="font-size:0.85rem;margin-top:0.75rem;padding:0 0.75rem;color:var(--gray-600);font-weight:500">
+              Milestones:</p>
+            <ol class="milestones">
+              <li>Fundamentos da nova arquitetura fiscal (EMI-ready)</li>
+              <li>Emissão de invoices (split por entidade)</li>
+              <li>Garantia de não regressão (BAU protegido)</li>
+              <li>Go-live EMI com compliance fiscal</li>
+              <li>Jornada e comunicação para creators</li>
+            </ol>
+            <div class="kr-checkbox" data-kr="reg-kr2">
+              <input type="checkbox" id="reg-kr2" onchange="toggleKR(this)">
+              <label for="reg-kr2">Meta atingida</label>
+            </div>
+          </div>
+
+          <div class="kr-card">
+            <div class="kr-header">
+              <span class="kr-badge">KR3</span>
+              <span class="kr-title">Reduzir tickets de creators Latam e EU relativos a Tax em 10%</span>
+            </div>
+            <div class="kr-details">
+              <div class="kr-detail-item"><strong>Métrica:</strong> Tickets fiscais Latam/EU por mês</div>
+              <div class="kr-detail-item"><strong>Baseline:</strong> 263 tickets/mês (média 2025)</div>
+              <div class="kr-detail-item"><strong>Meta:</strong> ~237 tickets/mês</div>
+              <div class="kr-detail-item"><strong>Prazo:</strong> Q4 2026</div>
+            </div>
+            <div class="kr-scale">
+              <details>
+                <summary>Escala de medição</summary>
+                <ul>
+                  <li><strong>0%:</strong> 263 tickets/mês ou mais</li>
+                  <li><strong>25%:</strong> ~256 tickets/mês (-2,5%)</li>
+                  <li><strong>50%:</strong> ~250 tickets/mês (-5%)</li>
+                  <li><strong>75%:</strong> ~243 tickets/mês (-7,5%)</li>
+                  <li><strong>100%:</strong> ~237 tickets/mês (-10%)</li>
+                  <li><strong>120%:</strong> Abaixo de 237 tickets/mês</li>
+                </ul>
+              </details>
+            </div>
+            <div class="kr-checkbox" data-kr="reg-kr3">
+              <input type="checkbox" id="reg-kr3" onchange="toggleKR(this)">
+              <label for="reg-kr3">Meta atingida</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Objetivo 2 Regulatory -->
+      <div class="objective">
+        <div class="objective-header" onclick="toggleObjective(this)">
+          <h2>Objetivo 2: Programas Tech</h2>
+          <span class="toggle">▼</span>
+        </div>
+        <div class="objective-desc">Atender aos programas técnicos corporativos, garantindo conformidade com os padrões
+          de qualidade, acoplamento e adoção de design system.</div>
+        <div class="objective-body">
+          <div class="kr-card">
+            <div class="kr-header">
+              <span class="kr-badge">KR4</span>
+              <span class="kr-title">Resolver 100% dos serviços (back) — Marketplace Low Coupling e Tech
+                Reliability</span>
+            </div>
+            <div class="kr-details">
+              <div class="kr-detail-item"><strong>Repositórios:</strong> api-hotpay-invoice, job-check-invoices,
+                api-gc-tax</div>
+              <div class="kr-detail-item"><strong>Meta:</strong> 100% dos serviços resolvidos</div>
+              <div class="kr-detail-item"><strong>Prazo:</strong> Q4 2026</div>
+            </div>
+            <div class="kr-checkbox" data-kr="reg-kr4">
+              <input type="checkbox" id="reg-kr4" onchange="toggleKR(this)">
+              <label for="reg-kr4">Meta atingida</label>
+            </div>
+          </div>
+
+          <div class="kr-card">
+            <div class="kr-header">
+              <span class="kr-badge">KR5</span>
+              <span class="kr-title">Atingir score GAS e PAS ≥ 92%</span>
+            </div>
+            <div class="kr-details">
+              <div class="kr-detail-item"><strong>Meta:</strong> Todos os repos com GAS e PAS ≥ 92%</div>
+              <div class="kr-detail-item"><strong>Prazo:</strong> Q4 2026</div>
+            </div>
+            <table class="repos-table">
+              <thead>
+                <tr>
+                  <th>Repositório</th>
+                  <th>Heimdall</th>
+                  <th>GAS</th>
+                  <th>PAS</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>api-hotpay-invoice</td>
+                  <td>87%</td>
+                  <td>72%</td>
+                  <td>100%</td>
+                </tr>
+                <tr>
+                  <td>api-gc-tax</td>
+                  <td>91%</td>
+                  <td>74%</td>
+                  <td>100%</td>
+                </tr>
+                <tr>
+                  <td>job-check-invoices</td>
+                  <td>88%</td>
+                  <td>67%</td>
+                  <td>N/A</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="kr-checkbox" data-kr="reg-kr5">
+              <input type="checkbox" id="reg-kr5" onchange="toggleKR(this)">
+              <label for="reg-kr5">Meta atingida</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>Gerado em 08/06/2026 — OKRs 2026 Foundation (eNotas) & Regulatory (Fiscal Journey)</footer>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'okrs-2026-progress';
+
+    function getState() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+      catch { return {}; }
+    }
+
+    function saveState(state) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.team-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.team-section').forEach(s => s.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function toggleObjective(header) {
+      header.parentElement.classList.toggle('collapsed');
+    }
+
+    function toggleKR(checkbox) {
+      const state = getState();
+      const krId = checkbox.id;
+      state[krId] = checkbox.checked;
+      saveState(state);
+
+      const wrapper = checkbox.closest('.kr-checkbox');
+      wrapper.classList.toggle('checked', checkbox.checked);
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const state = getState();
+
+      // eNotas: 6 KRs
+      const enotasKRs = ['enotas-kr1', 'enotas-kr2', 'enotas-kr3', 'enotas-kr4', 'enotas-kr5', 'enotas-kr6'];
+      const enotasDone = enotasKRs.filter(k => state[k]).length;
+      document.getElementById('enotas-progress-text').textContent = `${enotasDone}/6 KRs concluídos`;
+      document.getElementById('enotas-progress-fill').style.width = `${(enotasDone / 6) * 100}%`;
+
+      // Regulatory: 5 KRs
+      const regKRs = ['reg-kr1', 'reg-kr2', 'reg-kr3', 'reg-kr4', 'reg-kr5'];
+      const regDone = regKRs.filter(k => state[k]).length;
+      document.getElementById('regulatory-progress-text').textContent = `${regDone}/5 KRs concluídos`;
+      document.getElementById('regulatory-progress-fill').style.width = `${(regDone / 5) * 100}%`;
+    }
+
+    // Restore state on load
+    document.addEventListener('DOMContentLoaded', () => {
+      const state = getState();
+      Object.keys(state).forEach(krId => {
+        const cb = document.getElementById(krId);
+        if (cb && state[krId]) {
+          cb.checked = true;
+          cb.closest('.kr-checkbox').classList.add('checked');
+        }
+      });
+      updateProgress();
+    });
+  </script>
+</body>
+
+</html>
